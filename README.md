@@ -1,7 +1,7 @@
 
 # TAGS FFS
 
-Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable.
+Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable. Its designed to be, tiny, easy to use, and framework independent.
 
 ## [Demo](https://code.patxipierce.com/tags-ffs/tests.html)
 
