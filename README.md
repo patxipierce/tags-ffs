@@ -3,9 +3,11 @@
 
 Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable.
 
+## [Demo](https://code.patxipierce.com/tags-ffs/tests.html)
+
 ## Usage
 
-```markup
+```js
 <div class="tags-ffs">
     <input type="hidden" class="hidden-tags-ffs">
 </div>
@@ -87,9 +89,9 @@ window.onload = tags_ffs.init({
 
 ## Bugs
 
-Found a bug? That's a good thing. Please rise an issue here.
+Found a bug? That's a good thing. Please rise an issue [here](https://github.com/patxipierce/tags-ffs/issues).
 
 ## To Do
 
-- Needs to use data-attribute on deletion
-- More CSS styles for light and dark themes
+- Should use data-attribute on deletion instead of tag text.
+- More CSS styles for light and dark themes, for the kids.
