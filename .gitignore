@@ -1,0 +1,6 @@
+
+# ignore all libs in js directory.
+js/
+
+# Get the index file outta there.
+index.html
