@@ -1,9 +1,11 @@
 
 # TAGS FFS
 
-Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable. Its designed to be, tiny, easy to use, and framework independent.
+Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable. Its designed to be tiny, easy to use and framework independent. No modern CSS or modern JS was used in its creation, so it should be trustworthy to run in a toaster, or some other primitive setting.
 
-## [Demo](https://code.patxipierce.com/tags-ffs/tests.html)
+The whole file is 8kb. The minified version is really small... tiny.
+
+## [Demo](https://code.patxipierce.com/tags-ffs/tests.html).
 
 ## Usage
 
@@ -72,9 +74,9 @@ window.onload = tags_ffs.init({
 
 - `input_listen : function(holder, input, e)` - Adds listeners to the input and holder.
 
-- `del_item : function(item)` - Delete a tag
+- `del_item : function(item)` - Delete a tag.
 
-- `add_item : function(item, holder, allow_duplicates)` - Add a tag to holder and hidden inputs
+- `add_item : function(item, holder, allow_duplicates)` - Add a tag to holder and hidden inputs.
 
 
 ## Callbacks
@@ -95,3 +97,4 @@ Found a bug? That's a good thing. Please rise an issue [here](https://github.com
 
 - Should use data-attribute on deletion instead of tag text.
 - More CSS styles for light and dark themes, for the kids.
+- "tests.html" could be more to the point. The header is irrelevant.
