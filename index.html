@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="shortcut icon" href="//patxipierce.com/assets/img/favicons/favicon.ico"/>
+
+    <title>tags-ffs.js - Tags Fer Fork Sake</title>
+
+    <meta name="description" content="RaSyEn is a Random Syntax Engine" />
+    <meta name="keywords" content="random generation, random syntax engine, random phrase generator" />
+
+    <style type="text/css">
+        /* reset */
+        html{color:#000;background:#fff}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
+        
+        /* Tools */
+        .center-container { min-height: 150px; position: relative; height: 100%; width: 100%; }
+        .center-area { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .center-area:before { content: ''; display: inline-block; vertical-align: middle; height: 100%; }
+        .center-middle { width: 100%; text-align: center; display: inline-block; vertical-align: middle; }
+        .clearfix { overflow: auto; zoom: 1; }
+        
+        /* No JS no fun. */
+        #noscript { position: fixed; }
+        #noscript .center-area { background-color: rgba(255,0,0,.3); }
+        #noscript .center-middle div { background-color: #000; padding: 25px; display: inline-block; }
+        #noscript .center-middle span { font-size: 200%; line-height: 75px; }
+        #noscript .center-middle a { text-decoration: none; }
+        #noscript .center-middle a button { text-align:center; width: 100%; display: block; }
+        #noscript:target {
+            display: none;
+        }
+        
+        /* Styles */
+        html{
+            height: 100%;
+        }
+
+        body {
+            min-height: 100%;
+            margin: 0; 
+            padding: 0;
+            color: #ddd;
+            font-family: Hack, "Andale Mono", "Lucida Console", Helvetica, Arial, monospace;
+            font-size: 12px;
+        
+            background-color: #000; /* Fallback */
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7e7d), to(#0e0e0e));
+            background-image: -webkit-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:    -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:     -ms-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:      -o-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:         linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+            
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4 { margin: 15px 0; }
+        h1 { font-size: 200%; }
+        h2 { font-size: 190%; }
+        h3 { font-size: 160%; }
+        h4 { font-size: 140%; }
+        h5 { font-size: 120%; }
+
+        a { color: #fff; }
+        p { padding: 15px; }
+        ul { padding: 15px; }
+        header pre { font-size: 9px; }
+        header h1 { letter-spacing: 3px; }
+        h1 span.acronym { border-bottom: 1px solid #ddd; }
+        
+        footer,header { text-align: center; margin: 0 2% 0 2%; }
+        header, section, footer { background-color: #111; padding: 2%; }
+        
+        footer nav ul li,
+        header nav ul li { font-size: 140%; padding: 15px; display: inline; }
+
+        section, article { margin: 0 2%; }
+        section h2 { text-align: left; }
+        
+        article > pre > code.lang-ascii-art { padding: 0; border: none; }
+        article > pre { padding: 15px; border: 1px solid #888; border-radius: 3px; }
+
+        article ul > li > code {
+            border: 1px solid #888;
+            border-radius: 3px;
+            padding: 3px;
+        }
+
+        #raw-markdown,
+        #parsed-markdown {
+            display: none;
+        }
+
+        #parsed-markdown pre:first-child {
+            text-align: center;
+        }
+
+        footer nav ul li { display: inline; }
+
+        button { padding: 15px 0; border-radius: 4px; font-size: 140%; background-color: #111; color: #ddd; border: 1px solid #ddd; cursor: pointer; }
+        button:hover { background-color: #444; color: #fff; }
+        
+        footer nav ul li { list-style: none; text-align: right; padding: 15px; }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/themes/prism-twilight.min.css" integrity="sha256-+UKXHR4SMd37yUxqCERfCWTT8gUc3QPJ/UXlvgcE74A= sha384-gNdeA0DACsz5lOlhC+UC+yejYgPR2XOApdCRpU/I13CUg/rsOshhjLEeol9KwAem sha512-KB1URrbzIZS7Sbsk3cQC8b2c09b6bCAWWiDNmI5KReg+djZdzKYlUC6PpVKBgG4EeMbQXUNILu7vMHRwhLZhhQ==" crossorigin="anonymous" data-failsafe="js/prism/prism.min.css">
+
+</head>
+<body>
+    <!-- Tools -->
+    <noscript id="noscript" class="center-container">
+        <div class="center-area"><div class="center-middle"><div>
+            <span>No JavaScirpt - No fun.</span><br>
+            <a href="#noscript"><button class="small">OK</button></a>
+        </div></div></div>
+    </noscript>
+
+    <header>
+        <h1>tags-ffs.js Documentation:</h1>
+        
+
+        <p>The content of this page is the same as the README.md file<br>which you can find on the tags-ffs.js Github repository.</p>
+
+        <h3 id="version-placeholder"></h3>
+
+        <nav>
+            <ul>
+                <li><a href="https://github.com/patxipierce/tags-ffs/">tags-ffs.js on Github.</a></li>
+                <li><a href="http://code.patxipierce.com/tags-ffs/tests.html">tags-ffs.js test file.</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <article id="raw-markdown"></article>
+        <article id="parsed-markdown"></article>
+    </section>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="//patxipierce.com">Patxi Pierce</a></li>
+                <li><a href="https://github.com/patxipierce/tags-ffs">Fork tags-ffs.js on Github.</a></li>
+                <li><a href="//code.patxipierce.com/tags-ffs/tests.html">tags-ffs.js test file.</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script id="js-tags-ffs" src="tags-ffs.js" type="text/javascript"></script>
+
+    <!-- Load paint libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.17/marked.min.js" integrity="sha256-bY2LqlpR1jMYfCcwDmdvjfuUKL/q4oOyWCiCqMdiBRI= sha384-fvXeXKBQGdWf6U5usFRArxsll2G6hfrZF3P47nlXNUx/QDwUX7urcuMTiusIYY4+ sha512-rzDM8nWpJAqtu9r6Lc1tYGRhEdJfd9y82Al7lZPeCioramaBzMscKGv5akABv1xv8CsueUCKxecCbvcXjCKbTQ==" crossorigin="anonymous" data-failsafe="js/marked/marked.min.js"></script>
+
+    <script id="js-prism" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/prism.min.js" integrity="sha256-OyQW1t8DXfIOHVumLRBlVZrqfrPJSvmISfXVBGo7niE= sha384-o9okJ4J4Tuu96ZPTtzo9D8b+zRz0sHwSWbE6SD5VfgisUikXZeV+N/l7GyaUBkdJ sha512-mGT7gWDA8myu39pWIchR7OfkuJZ9uXkIQBUfIEsiPZzzgTSjY0SdRbWk64N1IOLr39dVOGN1paHMvUpX7of5gQ==" crossorigin="anonymous" data-failsafe="js/pirsm/pirsm.min.js"></script>
+
+
+    <script id="js-prism-javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/components/prism-javascript.min.js" integrity="sha256-tLhIAW/D2zypVjXCB31wyVYzDzNzxbGmymQKKTT7P8c= sha384-+9vP45obi3jB/3LYmZWdWP6FJZKEedWsGijqmAOSvU2oBcGaABLLVonx+gtdSts3 sha512-VEtCw4yS8Py/w4Pc2E08aSHAZz/pibY7FqHUNhx/E0CHw3dVK6uaqeLExFNcLLISh3tkHZTIP47C7NFq0l4nnQ==" crossorigin="anonymous" data-failsafe="js/pirsm/pirsm-javascript.min.js"></script>
+
+    <script id="js-prism-markup" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.11.0/components/prism-markup.min.js" integrity="sha256-Pu+GX9gKTRsQGV4xXzGhs23IiZpBhDGsiuRguW/g3BI= sha384-uaMb0OxOGzsQgeULaMj2c+fUeLh53qAgV5abFwAikEMynu8Stl2rWHPl8XE2FYdK sha512-CiI3FES9wIn70uU9K/KMYi8YR/O+OdB69eOJj+jJLWc77ejNA7FA3eKYM+4pNWkqWiQaTKzdMahDvmxYd9nNLg==" crossorigin="anonymous" data-failsafe="js/pirsm/pirsm-markup.min.js"></script>
+    
+
+    <script type="text/javascript">
+
+    
+    
+    /**
+    *   Helpers
+    **/
+
+    // Escape HTML
+    function decode_html(html) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    }
+
+    // Apply prism colouring highlights
+    function refresh_highlights(){
+        var types  = [
+            'js',
+            'markup'
+        ];
+        
+        for (var n = 0; n < types.length; n++) {
+            var codes = document.getElementsByClassName('lang-'+types[n]);
+            for (var i = 0; i < codes.length; i++) {
+                var code = codes[i];
+                var decoded = decode_html(code.innerHTML);
+                code.innerHTML = Prism.highlight(decoded, Prism.languages.javascript);
+            }
+        }
+    }
+
+    // Load version if any
+    function tags_ffs_version(){
+        if(typeof tags_ffs !== 'undefined'){
+           document.getElementById('version-placeholder').innerHTML = 'Version '+tags_ffs.version;
+        }
+    }
+
+    /**
+    *   Load Docs.
+    **/
+
+    // An object to handle AJAX requests
+    var ajax = {
+        xhr : null,
+        get : function(obj){
+            var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            xhr.open('GET', obj.url);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState > 3 && xhr.status == 200) { 
+                    obj.callback(xhr.responseText);
+                }
+            };
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.send();
+            this.xhr = xhr;
+            return this;
+        },
+    }
+
+    // Add script to headers
+    function load_script(src){
+        var e = document.createElement("script");
+        e.src = src;
+        e.onload = rasyen_check_integrity;
+        e.type = "text/javascript";
+        document.getElementsByTagName("head")[0].appendChild(e);
+    }
+
+    // Tests if scripts have been loaded
+    function gitpage_check_integrity(){
+
+        var scripts = document.getElementsByTagName('script');
+        
+        for (var i = 0; i < scripts.length; i++) {
+            var el = scripts[i];
+            var src = el.getAttribute('data-failsafe');
+            if(src !== null){
+
+                // Test each loaded script:
+                if(el.id == 'js-marked' && typeof marked == 'undefined'){
+                    load_script(src);
+                    return false;
+                
+                }else if(el.id == 'js-prism' && typeof Prism == 'undefined'){
+                    load_script(el.getAttribute('data-failsafe'));
+                    return false;
+
+                }else if(el.id == 'js-prism-javascript' && !Prism.languages.hasOwnProperty('javascript')){
+                    load_script(el.getAttribute('data-failsafe'));
+                    return false;
+
+                }else if(el.id == 'js-prism-markup' && !Prism.languages.hasOwnProperty('markup')){
+                    load_script(el.getAttribute('data-failsafe'));
+                    return false;
+                }
+            }
+        }
+
+        // All tests passed, we can start our application
+        gitpage_docs_init();
+        return true;
+    }
+
+    // The main documentation loader
+    function gitpage_load_documentation() {
+        // Load README file.
+        var readme_url = 'README.md';
+        ajax.get({
+            url: readme_url,
+            callback: function(data){
+                document.getElementById('raw-markdown').innerHTML = data;
+                var parsed_box = document.getElementById('parsed-markdown');
+
+                // Returns a highlighted HTML string
+                parsed_box.innerHTML = marked(data);
+                parsed_box.style.display = 'block';
+
+                refresh_highlights();
+            }
+        });  
+    }
+
+    /**
+    *   INIT
+    **/
+
+    // Initiation function
+    function gitpage_docs_init(){
+        // Load version
+        tags_ffs_version();
+
+        // Load docs
+        gitpage_load_documentation();
+    }
+
+    // Go!
+    window.onload = gitpage_check_integrity;
+    </script>
+
+
+</body>
+</html>

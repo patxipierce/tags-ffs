@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="shortcut icon" href="//patxipierce.com/assets/img/favicons/favicon.ico" />
+
+    <title>tags-ffs.js - Test page</title>
+
+    <meta name="description" content="tags-ffs.js tags in less than 300 lines of JS." />
+    <meta name="keywords" content="tags, javascipt, hashtag library, tag input, tag generation" />
+
+    <style type="text/css">
+        /* reset */
+        html{color:#000;background:#fff}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
+        
+        /* Tools */
+        .center-container { min-height: 150px; position: relative; height: 100%; width: 100%; }
+        .center-area { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+        .center-area:before { content: ''; display: inline-block; vertical-align: middle; height: 100%; }
+        .center-middle { width: 100%; text-align: center; display: inline-block; vertical-align: middle; }
+        .clearfix { overflow: auto; zoom: 1; }
+        
+        /* No JS no fun. */
+        #noscript { position: fixed; }
+        #noscript .center-area { background-color: rgba(255,0,0,.3); }
+        #noscript .center-middle div { background-color: #000; padding: 25px; display: inline-block; }
+        #noscript .center-middle span { font-size: 200%; line-height: 75px; }
+        #noscript .center-middle a { text-decoration: none; }
+        #noscript .center-middle a button { text-align:center; width: 100%; display: block; }
+        #noscript:target {
+            display: none;
+        }
+        
+        /* Styles */
+        html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100%;
+            margin: 0; 
+            padding: 0;
+            color: #ddd;
+            font-family: Hack, "Andale Mono", "Lucida Console", Helvetica, Arial, monospace;
+            font-size: 12px;
+        
+            background-color: #000; /* Fallback */
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7e7d), to(#0e0e0e));
+            background-image: -webkit-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:    -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:     -ms-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:      -o-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
+            background-image:         linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
+            
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        h1, h2, h3, h4 { margin: 15px 0; }
+        h1 { font-size: 200%; }
+        h2 { font-size: 190%; }
+        h3 { font-size: 160%; }
+        h4 { font-size: 140%; }
+        h5 { font-size: 120%; }
+
+        a { color: #fff; }
+        p { padding: 15px; }
+        ul { padding: 15px; }
+        header pre { font-size: 9px; }
+        header h1 { letter-spacing: 3px; }
+        h1 span.acronym { border-bottom: 1px solid #ddd; }
+        
+        footer,header { text-align: center; margin: 0 2% 0 2%; }
+        header, section, footer { background-color: #111; padding: 2%; }
+        
+        footer nav ul li,
+        header nav ul li { font-size: 140%; padding: 15px; display: inline; }
+
+        section, article { margin: 0 2%; }
+        section h2 { text-align: center; }
+        
+        article > pre > code.lang-ascii-art { padding: 0; border: none; }
+        article > pre { padding: 15px; border: 1px solid #888; border-radius: 3px; }
+
+        article ul > li > code {
+            border: 1px solid #888;
+            border-radius: 3px;
+            padding: 3px;
+        }
+
+        #raw-markdown,
+        #parsed-markdown {
+            display: none;
+        }
+
+        #parsed-markdown pre:first-child {
+            text-align: center;
+        }
+
+        footer nav ul li { display: inline; }
+
+        button { padding: 15px 0; border-radius: 4px; font-size: 140%; background-color: #111; color: #ddd; border: 1px solid #ddd; cursor: pointer; }
+        button:hover { background-color: #444; color: #fff; }
+        
+        footer nav ul li { list-style: none; text-align: right; padding: 15px; }
+    </style>
+
+</head>
+<body>
+    <!-- Tools -->
+    <noscript id="noscript" class="center-container">
+        <div class="center-area"><div class="center-middle"><div>
+            <span>No JavaScirpt - No fun.</span><br>
+            <a href="#noscript"><button class="small">OK</button></a>
+        </div></div></div>
+    </noscript>
+
+    <header>
+        <h1>tags-ffs</h1>
+        
+        <p>A test page to see tags-ffs in action.</p>
+
+        <nav>
+            <ul>
+                <li><a href="https://github.com/patxipierce/tags-ffs/">tags-ffs on Github</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <article>
+            <p>A single simple tag input:</p>
+            <div class="tags-ffs">
+                <input type="hidden" class="hidden-tags-ffs" name="simple-tag-input">
+            </div>
+
+            <p>Pre-set tag input</p>
+            <div class="tags-ffs">
+                <input type="hidden" class="hidden-tags-ffs" name="pre-set-tag-input" value="pre-set,tag">
+            </div>
+
+            <p>Hint: When entering a tag use backspace to delete the last tag of your current tag box.</p>
+        </article>
+    </section>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="//patxipierce.com">Patxi Pierce</a></li>
+                <li><a href="https://github.com/patxipierce/tags-ffs">Fork tags-ffs on Github</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script id="js-tags-ffs" src="tags-ffs.js" type="text/javascript"></script>
+
+    <script>
+        window.onload = tags_ffs.init;
+    </script>
+
+</body>
+</html>
