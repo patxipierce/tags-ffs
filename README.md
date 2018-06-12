@@ -103,9 +103,8 @@ Found a bug? That's a good thing. Please rise an issue [here](https://github.com
 
 ## To Do
 
-- Should use data-attribute on deletion instead of tag text.
+- Should use data-attribute on deletion instead of tag text (so its a little more organized).
 - More CSS styles for light and dark themes, for the kids.
-- "tests.html" could be more to the point. The header is irrelevant.
 
 ## Changelog
 
