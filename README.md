@@ -98,3 +98,8 @@ Found a bug? That's a good thing. Please rise an issue [here](https://github.com
 - Should use data-attribute on deletion instead of tag text.
 - More CSS styles for light and dark themes, for the kids.
 - "tests.html" could be more to the point. The header is irrelevant.
+
+## Changelog
+
+- 0.0.2 - Squashed bug related to pasting text containing with commas.
+- 0.0.1 - Initial release.

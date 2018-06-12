@@ -14,7 +14,7 @@
 */
 
 var tags_ffs = {
-    version : '0.0.1',
+    version : '0.0.2',
     defs : {    // Defaults
         container_class  : 'tags-ffs',
         hidden_class : 'hidden-tags-ffs',
@@ -155,7 +155,18 @@ var tags_ffs = {
     },
 
     add_item : function(text, holder, allow_duplicates){
-        // Add to hidden input
+
+        // If new tag has a comma
+        // (it can happen by pasting, or by JS)
+        if(text.indexOf(',') > -1){
+            var texts = text.split(',');
+            for (var i = 0; i < texts.length; i++) {
+                tags_ffs.add_item(texts[i], holder, allow_duplicates);
+            }
+            return;
+        }
+
+        // Get tag holder, the hidden input element
         var hidden = holder
             .parentNode
             .getElementsByClassName(tags_ffs.opts.hidden_class)[0];
@@ -168,6 +179,7 @@ var tags_ffs = {
         ));
         text = s.innerText || s.textContent;
 
+        // Check if tag is already present
         if(hidden.value.length){
             var arr = hidden.value.split(',');
             var not_found = (arr.indexOf(text) === -1);
@@ -197,8 +209,10 @@ var tags_ffs = {
             s.appendChild(u);
         }
 
+        // Callback
         tags_ffs.opts.on_add(s);
-        holder.appendChild(s)
+
+        holder.appendChild(s);
     },
 
     del_item : function(item){
