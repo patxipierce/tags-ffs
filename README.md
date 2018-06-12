@@ -1,7 +1,7 @@
 
 # TAGS FFS
 
-Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable. 
+Tags For _Forks_ Sake is less than 300 lines of Javascript that create a tag input that is very customizable. 
 
 - Its designed to be tiny, 
 - Easy to use
@@ -11,7 +11,9 @@ No modern CSS or modern JS was used in its creation, so it should be trustworthy
 
 The minified version is really small... around ~4 Kb, tiny.
 
-## [Demo](https://code.patxipierce.com/tags-ffs/tests.html).
+## [Demo](https://code.patxipierce.com/tags-ffs/tests.html) ...
+
+Showing Tags-ffs in action.
 
 ## Usage
 
@@ -20,7 +22,7 @@ The minified version is really small... around ~4 Kb, tiny.
     <input type="hidden" class="hidden-tags-ffs">
 </div>
 
-<script src="path/to/tags-ffs.js">
+<script src="path/to/tags-ffs.js"></script>
 <script>
     window.onload = tags_ffs.init;
 </script>
@@ -33,7 +35,7 @@ Or with bells and whistles:
     <input type="hidden" class="hidden-tags-ffs">
 </div>
 
-<script src="path/to/tags-ffs.js">
+<script src="path/to/tags-ffs.js"></script>
 <script>
 // Values shown are the libraries defaults
 window.onload = tags_ffs.init({
