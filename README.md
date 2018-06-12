@@ -1,9 +1,15 @@
 
 # TAGS FFS
 
-Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable. Its designed to be tiny, easy to use and framework independent. No modern CSS or modern JS was used in its creation, so it should be trustworthy to run in a toaster, or some other primitive setting.
+Tags For Forks Sake is a library of less than 300 lines that creates a tag input that is very customizable. 
 
-The whole file is 8kb. The minified version is really small... tiny.
+- Its designed to be tiny, 
+- Easy to use
+- Framework independent. 
+
+No modern CSS or modern JS was used in its creation, so it should be trustworthy to run in a toaster, or some other primitive setting.
+
+The minified version is really small... around ~4 Kb, tiny.
 
 ## [Demo](https://code.patxipierce.com/tags-ffs/tests.html).
 
@@ -101,5 +107,5 @@ Found a bug? That's a good thing. Please rise an issue [here](https://github.com
 
 ## Changelog
 
-- 0.0.2 - Squashed bug related to pasting text containing with commas.
+- 0.0.2 - Squashed bug related to pasting text containing commas.
 - 0.0.1 - Initial release.
