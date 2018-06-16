@@ -12,41 +12,14 @@
     <meta name="description" content="tags-ffs.js tags in less than 300 lines of JS." />
     <meta name="keywords" content="tags, javascipt, hashtag library, tag input, tag generation" />
 
-    <style type="text/css">
-        html {
-            height: 100%;
-        }
-
-        body {
-            min-height: 100%;
-            margin: 0; 
-            padding: 0;
-            color: #ddd;
-            font-family: Hack, "Andale Mono", "Lucida Console", Helvetica, Arial, monospace;
-            font-size: 12px;        
-            background-color: #0e0e0e;
-        }
-
-        a { color: #fff; }
-        p { padding: 15px; }
-        ul { padding: 15px; }
-        header pre { font-size: 9px; }
-        header h1 { letter-spacing: 3px; }
-        h1 span.acronym { border-bottom: 1px solid #ddd; }
-        
-        footer,header { text-align: center; margin: 0 2% 0 2%; }
-        header, section, footer { background-color: #111; padding: 2%; }
-        
-        footer nav ul li,
-        header nav ul li { font-size: 140%; padding: 15px; display: inline; }
-
-        section h2 { text-align: center; }
-        section, article { margin: 0 2%; }
-
-        footer nav ul li { display: inline; list-style: none; text-align: right; padding: 15px; }
+    <style type="text/css" id="non-relevant-styles">
+        html{height:100%}body{min-height:100%;margin:0;padding:0;color:#ddd;font-family:Hack, "Andale Mono", "Lucida Console", Helvetica, Arial, monospace;font-size:12px;background-color:#0e0e0e}a{color:#fff}p{padding:15px}ul{padding:15px}header pre{font-size:9px}header h1{letter-spacing:3px}h1 span.acronym{border-bottom:1px solid #ddd}footer,header{text-align:center;margin:0 2%}footer,header,section{background-color:#111;padding:2%}footer nav ul li,header nav ul li{font-size:140%;padding:15px;display:inline}section h2{text-align:center}article,section{margin:0 2%}footer nav ul li{display:inline;list-style:none;text-align:right;padding:15px}
     </style>
 
     <style id="cutom-tags-style">
+    /*
+    * These are the styles for the custom tag box. 
+    */
     .tags-ffs-custom {
         border: 1px dotted #fff;
         border-radius: 10px;
@@ -101,7 +74,7 @@
         height: 20px;
         width: 20px;
         background-repeat: no-repeat;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="3.704mm" width="3.704mm" version="1.1" viewBox="0 0 3.7041667 3.7041657"><g transform="translate(-71.24 -61.6)">  <path d="m71.39 61.75 3.417 3.417m0-3.417-3.417 3.417" stroke="#ff93fa" stroke-linecap="round" stroke-width=".2847" fill="none"/></g></svg>');
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="3.704mm" width="3.704mm" version="1.1" viewBox="0 0 3.7041667 3.7041657"><g transform="translate(-71.24 -61.6)">  <path d="m71.39 61.75 3.417 3.417m0-3.417-3.417 3.417" stroke="%23ff93fa" stroke-linecap="round" stroke-width=".2847" fill="none"/></g></svg>');
     }
     .tags-ffs-custom .holder-ffs span.pre-delete{
         border-color: hotpink;
@@ -159,7 +132,10 @@
 
     <script id="js-tags-ffs" src="tags-ffs.js"></script>
     <script>
+
+        // Putting all calls to tags-ffs in a wrapper function.
         function tffs_init(){
+        
             // This initiates the first two tag boxes
             tags_ffs.init();
 
@@ -170,6 +146,7 @@
                 css : '', // CSS is all in #cutom-tags-style
             });
         }
+        
         window.onload = tffs_init;
     </script>
 
