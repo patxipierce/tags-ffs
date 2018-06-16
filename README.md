@@ -95,7 +95,7 @@ window.onload = tags_ffs.init({
 
 ## Options
 
-- `input_placeholder` : string - 
+- `input_placeholder` : string - The placeholder text for the tag input box.
 
 - `add_on_enter` : boolean - If set to true, tags can be added by pressing enter as well as by comma.
 
