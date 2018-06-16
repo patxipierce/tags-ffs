@@ -19,18 +19,19 @@ var tags_ffs = {
         container_class  : 'tags-ffs',
         hidden_class : 'hidden-tags-ffs',
         input_class   : 'input-ffs',
-        input_placeholder : 'Comma, Separated, Tags',
         holder_class  : 'holder-ffs',
         tag_class     : 'tag-ffs',
+        input_placeholder : 'Comma, Separated, Tags',
         delete_icon   : 'x',
         css : [
             '.tags-ffs { border: 1px solid; width: 100%; overflow: hidden; clear: both; }',
-            '.input-ffs { border-color: transparent; background-color: transparent; color: inherit; padding: 15px 10px; width: 100%; float: left; box-sizing: border-box; }',
-            '.holder-ffs { float: left; min-height: 24px; }',
-            '.holder-ffs span { position: relative; display: inline-block; line-height: 30px; border: 1px solid; border-radius: 3px; padding: 2px 15px 2px 0; margin: 3px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
-            '.holder-ffs span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
-            '.holder-ffs span.pre-delete{ border-color: #c00; }'
+            '.tags-ffs .input-ffs { border-color: transparent; background-color: transparent; color: inherit; padding: 15px 10px; width: 100%; float: left; box-sizing: border-box; }',
+            '.tags-ffs .holder-ffs { float: left; min-height: 24px; }',
+            '.tags-ffs .holder-ffs span { position: relative; display: inline-block; line-height: 30px; border: 1px solid; border-radius: 3px; padding: 2px 15px 2px 0; margin: 3px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
+            '.tags-ffs .holder-ffs span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
+            '.tags-ffs .holder-ffs span.pre-delete{ border-color: #c00; }'
         ].join(''),
+        add_on_enter : true,
         on_add : function(f){ return f; },
         on_del : function(f){ return f; },
         on_create_input : function(el){ return el; },
@@ -55,7 +56,7 @@ var tags_ffs = {
         var boxes = document.getElementsByClassName(tags_ffs.opts.container_class);
         if(boxes.length){
             
-            if(tags_ffs.opts.css){ // Header style
+            if(tags_ffs.opts.css.length){ // Header style
                 var style = document.createElement("style");
                 style.type = "text/css";
                 style.id = 'tags-ffs-style';
@@ -127,17 +128,24 @@ var tags_ffs = {
         // Trim new tag
         var new_val  = input.value.replace(/^\s+|\s+$/g,'');
 
+        // Add tag
         var k = (e.keyCode) ? e.keyCode : e.which;
         if(k == 188){ // comma
-            input.value = '';        
+            input.value = '';     
             if(new_val === ','){
                 return;
             }
             tags_ffs.add_item(new_val.slice(0,-1), holder);
+        }else if(k == 13 && this.opts.add_on_enter){ //  or enter
+            input.value = '';
+            if(new_val === ''){
+                return;
+            }
+            tags_ffs.add_item(new_val, holder);
         }
-        
-        if(holder.lastChild){
-            
+
+        // Delete tag
+        if(holder.lastChild){    
             if(new_val.length){
                 // Remove pre-delete (if any)
                 holder.lastChild.className = this.opts.tag_class;       
@@ -178,7 +186,8 @@ var tags_ffs = {
             text.replace(/^\s+|\s+$/g,'') // trim
         ));
         text = s.innerText || s.textContent;
-
+        s.setAttribute('data-tag',text);
+        
         // Check if tag is already present
         if(hidden.value.length){
             var arr = hidden.value.split(',');
@@ -197,9 +206,7 @@ var tags_ffs = {
         // Add delete buttons
         if(this.opts.delete_icon){ 
             var u = document.createElement('u');
-            u.appendChild(document.createTextNode(
-                this.opts.delete_icon
-            ));
+            u.innerHTML = this.opts.delete_icon;
 
             u.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -208,6 +215,7 @@ var tags_ffs = {
 
             s.appendChild(u);
         }
+
 
         // Callback
         tags_ffs.opts.on_add(s);
@@ -223,11 +231,8 @@ var tags_ffs = {
             .parentNode
             .getElementsByClassName(tags_ffs.opts.hidden_class)[0];        
 
-        // Remove close button and get text
-        item.removeChild(item.lastChild);
-        var txt = item.innerText || item.textContent;
-
-        // TODO: tag text should be stored in data attribute not txt
+        // Get text
+        var txt = item.getAttribute('data-tag');
 
         // remove values from hidden input
         if(hidden.value){

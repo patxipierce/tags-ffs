@@ -37,7 +37,10 @@ Or with bells and whistles:
 
 <script src="path/to/tags-ffs.js"></script>
 <script>
-// Values shown are the libraries defaults
+/**
+*   Run tags_ffs
+*   Values shown are the libraries defaults
+**/
 window.onload = tags_ffs.init({
     // container element class
     container_class  : 'tags-ffs',
@@ -45,12 +48,15 @@ window.onload = tags_ffs.init({
     hidden_class : 'hidden-tags-ffs',
     // class of the created input
     input_class   : 'input-ffs',
-    // crated input placeholder
-    input_placeholder : 'Comma, Separated, Tags',
     // class for the created tag box where tags are put
     holder_class  : 'holder-ffs',
     // individual created tags will have this class
     tag_class     : 'tag-ffs',
+
+    // crated input placeholder,
+    input_placeholder : 'Comma, Separated, Tags',
+    // Add tags when Enter key is pressed
+    add_on_enter : true,
     // HTML or character to use for tag deletion
     delete_icon   : 'x',
     // Plugin default css 
@@ -63,6 +69,7 @@ window.onload = tags_ffs.init({
         '.holder-ffs span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
         '.holder-ffs span.pre-delete{ border-color: #c00; }'
     ].join(''),
+
     // Callbacks
     on_add : function(f){ return f; },
     on_del : function(f){ return f; },
@@ -82,10 +89,19 @@ window.onload = tags_ffs.init({
 
 - `input_listen : function(holder, input, e)` - Adds listeners to the input and holder.
 
-- `del_item : function(item)` - Delete a tag.
+- `del_item : function(item)` - Delete a tag. Item is the tag element.
 
 - `add_item : function(item, holder, allow_duplicates)` - Add a tag to holder and hidden inputs.
 
+## Options
+
+- `input_placeholder` : string - 
+
+- `add_on_enter` : boolean - If set to true, tags can be added by pressing enter as well as by comma.
+
+- `delete_icon` : string - The image, or text to be assigned to the "delete tag" icon.
+
+- `css` : string - CSS styles more on this in the [Styling](#styling) section.
 
 ## Callbacks
 
@@ -97,16 +113,74 @@ window.onload = tags_ffs.init({
 
 - `on_create_holder : function(el){ return el; }` - Called when the holder is created.
 
+## Styling
+
+Default styles on FFS are rudimentary at best. But this is easy to fix given you have some experience with CSS. To set your own styles you will have to remove the default ones:
+
+```js
+// Remove default styles
+tags_ffs.init({css : ''});
+
+```
+
+And then you can add your own styles to the header or to the css option:
+
+```css
+.tags-ffs {
+    border: 1px solid;
+    width: 100%;
+    overflow: hidden;
+    clear: both;
+}
+.tags-ffs .input-ffs {
+    border-color: transparent;
+    background-color: transparent;
+    color: inherit;
+    padding: 15px 10px;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+}
+.tags-ffs .holder-ffs {
+    float: left;
+    min-height: 24px;
+}
+.tags-ffs .holder-ffs span {
+    position: relative;
+    display: inline-block;
+    line-height: 30px;
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 2px 15px 2px 0;
+    margin: 3px;
+    max-width: 320px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tags-ffs .holder-ffs span u {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    opacity: .5;
+}
+.tags-ffs .holder-ffs span.pre-delete{
+    border-color: #c00;
+}
+```
+
 ## Bugs
 
 Found a bug? That's a good thing. Please rise an issue [here](https://github.com/patxipierce/tags-ffs/issues).
 
 ## To Do
 
-- Should use data-attribute on deletion instead of tag text (so its a little more organized).
-- More CSS styles for light and dark themes, for the kids.
+- A "real" inline tag-box would be nice to have in the test page.
 
 ## Changelog
 
+- 0.0.3 - Started using data-tag attribute to store the tags, added "submit_on_enter" option.
 - 0.0.2 - Squashed bug related to pasting text containing commas.
 - 0.0.1 - Initial release.

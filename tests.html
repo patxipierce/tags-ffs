@@ -13,28 +13,6 @@
     <meta name="keywords" content="tags, javascipt, hashtag library, tag input, tag generation" />
 
     <style type="text/css">
-        /* reset */
-        html{color:#000;background:#fff}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
-        
-        /* Tools */
-        .center-container { min-height: 150px; position: relative; height: 100%; width: 100%; }
-        .center-area { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
-        .center-area:before { content: ''; display: inline-block; vertical-align: middle; height: 100%; }
-        .center-middle { width: 100%; text-align: center; display: inline-block; vertical-align: middle; }
-        .clearfix { overflow: auto; zoom: 1; }
-        
-        /* No JS no fun. */
-        #noscript { position: fixed; }
-        #noscript .center-area { background-color: rgba(255,0,0,.3); }
-        #noscript .center-middle div { background-color: #000; padding: 25px; display: inline-block; }
-        #noscript .center-middle span { font-size: 200%; line-height: 75px; }
-        #noscript .center-middle a { text-decoration: none; }
-        #noscript .center-middle a button { text-align:center; width: 100%; display: block; }
-        #noscript:target {
-            display: none;
-        }
-        
-        /* Styles */
         html {
             height: 100%;
         }
@@ -45,26 +23,9 @@
             padding: 0;
             color: #ddd;
             font-family: Hack, "Andale Mono", "Lucida Console", Helvetica, Arial, monospace;
-            font-size: 12px;
-        
-            background-color: #0e0e0e; /* Fallback */
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7e7d), to(#0e0e0e));
-            background-image: -webkit-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-            background-image:    -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-            background-image:     -ms-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-            background-image:      -o-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%);
-            background-image:         linear-gradient(to bottom, #7d7e7d 0%, #0e0e0e 100%);
-            
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            font-size: 12px;        
+            background-color: #0e0e0e;
         }
-
-        h1, h2, h3, h4 { margin: 15px 0; }
-        h1 { font-size: 200%; }
-        h2 { font-size: 190%; }
-        h3 { font-size: 160%; }
-        h4 { font-size: 140%; }
-        h5 { font-size: 120%; }
 
         a { color: #fff; }
         p { padding: 15px; }
@@ -79,26 +40,69 @@
         footer nav ul li,
         header nav ul li { font-size: 140%; padding: 15px; display: inline; }
 
-        section, article { margin: 0 2%; }
         section h2 { text-align: center; }
+        section, article { margin: 0 2%; }
 
-        footer nav ul li { display: inline; }
+        footer nav ul li { display: inline; list-style: none; text-align: right; padding: 15px; }
+    </style>
 
-        button { padding: 15px 0; border-radius: 4px; font-size: 140%; background-color: #111; color: #ddd; border: 1px solid #ddd; cursor: pointer; }
-        button:hover { background-color: #444; color: #fff; }
-        
-        footer nav ul li { list-style: none; text-align: right; padding: 15px; }
+    <style id="cutom-tags-style">
+    .tags-ffs-custom {
+        border: 1px dotted #fff;
+        border-radius: 10px;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        background-color: hotpink;
+    }
+    .tags-ffs-custom .input-ffs {
+        color: #000;
+        border: none;
+        background-color: lightcyan;
+        font-size: 20px;
+        padding: 10px 10px;
+        width: 100%;
+    }
+    .tags-ffs-custom .holder-ffs {
+        min-height: 24px;
+        min-width: 200px;
+    }
+    .tags-ffs-custom .holder-ffs span {
+        position: relative;
+        display: inline-block;
+        line-height: 30px;
+        color: hotpink;
+        border: 1px solid pink;
+        background-color: white;
+        font-weight: bold;
+        border-radius: 3px;
+        padding: 5px 25px 5px 15px;
+        margin: 3px 6px;
+
+        max-width: 320px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .tags-ffs-custom .holder-ffs span u {
+        position: absolute;
+        top: 7px;
+        right: 4px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .tags-ffs-custom .holder-ffs span.pre-delete{
+        border-color: hotpink;
+        background-color: pink;
+        color: #fff;
+    }
     </style>
 
 </head>
 <body>
-    <!-- Tools -->
-    <noscript id="noscript" class="center-container">
-        <div class="center-area"><div class="center-middle"><div>
-            <span>No JavaScirpt - No fun.</span><br>
-            <a href="#noscript"><button class="small">OK</button></a>
-        </div></div></div>
-    </noscript>
+    <noscript id="noscript">No JavaScirpt - No fun.</noscript>
 
     <header>
         <h1>tags-ffs</h1>
@@ -121,12 +125,17 @@
                 <input type="hidden" class="hidden-tags-ffs" name="simple-tag-input">
             </div>
 
-            <p>Pre-set tag input</p>
+            <p>Pre-set tag input (by setting the value of the hidden input to <code>value="pre-set,tag"</code>)</p>
             <div class="tags-ffs">
                 <input type="hidden" class="hidden-tags-ffs" name="pre-set-tag-input" value="pre-set,tag">
             </div>
 
             <p>Hint: When entering a tag use backspace to delete the last tag of your current tag box.</p>
+
+            <p>Here is a tag-box with custom styles that uses flexbox.</p>
+            <div class="tags-ffs-custom">
+                <input type="hidden" class="hidden-tags-ffs" name="styled-tag-input" value="pre-set,tags">
+            </div>
         </article>
     </section>
 
@@ -134,14 +143,25 @@
         <nav>
             <ul>
                 <li><a href="//patxipierce.com">Patxi Pierce</a></li>
-                <li><a href="https://github.com/patxipierce/tags-ffs">Fork tags-ffs on Github</a></li>
             </ul>
         </nav>
     </footer>
 
     <script id="js-tags-ffs" src="tags-ffs.js"></script>
     <script>
-        window.onload = tags_ffs.init;
+        function tffs_init(){
+            // This initiates the first two tag boxes
+            tags_ffs.init();
+
+            // This is for the third styled tag box
+            tags_ffs.init({
+                container_class : 'tags-ffs-custom',
+                input_placeholder : 'Flexbox styled tag-box...',
+                css : '', // CSS is all in #cutom-tags-style
+                delete_icon : '<svg xmlns="http://www.w3.org/2000/svg" height="3.704mm" width="3.704mm" version="1.1" viewBox="0 0 3.7041667 3.7041657"><g transform="translate(-71.24 -61.6)">  <path d="m71.39 61.75 3.417 3.417m0-3.417-3.417 3.417" stroke="#ff93fa" stroke-linecap="round" stroke-width=".2847" fill="none"/></g></svg>'
+            });
+        }
+        window.onload = tffs_init;
     </script>
 
 </body>
