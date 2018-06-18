@@ -63,11 +63,11 @@ window.onload = tags_ffs.init({
     // (If you change a class name you will have to change this too)
     css : [
         '.tags-ffs { border: 1px solid; width: 100%; overflow: hidden; clear: both; }',
-        '.input-ffs { border-color: transparent; background-color: transparent; color: inherit; padding: 15px 10px; width: 100%; float: left; box-sizing: border-box; }',
-        '.holder-ffs { float: left; min-height: 24px; }',
-        '.holder-ffs span { position: relative; display: inline-block; line-height: 30px; border: 1px solid; border-radius: 3px; padding: 2px 15px 2px 0; margin: 3px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
-        '.holder-ffs span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
-        '.holder-ffs span.pre-delete{ border-color: #c00; }'
+        '.tags-ffs .input-ffs { border-color: transparent; background-color: transparent; color: inherit; padding: 15px 10px; width: 100%; float: left; box-sizing: border-box; }',
+        '.tags-ffs .holder-ffs { float: left; min-height: 24px; }',
+        '.tags-ffs .holder-ffs span { position: relative; display: inline-block; line-height: 30px; border: 1px solid; border-radius: 3px; padding: 2px 15px 2px 0; margin: 3px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
+        '.tags-ffs .holder-ffs span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
+        '.tags-ffs .holder-ffs span.pre-delete{ border-color: #c00; }'
     ].join(''),
 
     // Callbacks
