@@ -181,6 +181,7 @@ Found a bug? That's a good thing. Please rise an issue [here](https://github.com
 
 ## Changelog
 
+- 0.0.4 - Pasted comma bug fixed (again).
 - 0.0.3 - Started using data-tag attribute to store the tags, added "submit_on_enter" option.
 - 0.0.2 - Squashed bug related to pasting text containing commas.
 - 0.0.1 - Initial release.

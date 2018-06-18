@@ -15,7 +15,7 @@
 
 var tags_ffs = (function(){
     return {
-        version : '0.0.3',
+        version : '0.0.4',
         defs : {    // Defaults
             container_class  : 'tags-ffs',
             hidden_class : 'hidden-tags-ffs',
@@ -164,6 +164,11 @@ var tags_ffs = (function(){
         },
 
         add_item : function(text, holder, allow_duplicates){
+
+            if(!text){
+                // No text, no tag
+                return;
+            }
 
             // If new tag has a comma
             // (it can happen by pasting, or by JS)
