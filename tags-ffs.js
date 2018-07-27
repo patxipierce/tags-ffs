@@ -15,7 +15,7 @@
 
 var tags_ffs = (function(){
     return {
-        version : '0.0.4',
+        version : '0.0.5',
         defs : {    // Defaults
             container_class  : 'tags-ffs',
             hidden_class : 'hidden-tags-ffs',
@@ -24,14 +24,7 @@ var tags_ffs = (function(){
             tag_class     : 'tag-ffs',
             input_placeholder : 'Comma, Separated, Tags',
             delete_icon   : 'x',
-            css : [
-                '.tags-ffs { border: 1px solid; width: 100%; overflow: hidden; clear: both; }',
-                '.tags-ffs .input-ffs { border-color: transparent; background-color: transparent; color: inherit; padding: 15px 10px; width: 100%; float: left; box-sizing: border-box; }',
-                '.tags-ffs .holder-ffs { float: left; min-height: 24px; }',
-                '.tags-ffs .holder-ffs span { position: relative; display: inline-block; line-height: 30px; border: 1px solid; border-radius: 3px; padding: 2px 15px 2px 0; margin: 3px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
-                '.tags-ffs .holder-ffs span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
-                '.tags-ffs .holder-ffs span.pre-delete{ border-color: #c00; }'
-            ].join(''),
+            css : '',
             add_on_enter : true,
             on_add : function(f){ return f; },
             on_del : function(f){ return f; },
@@ -57,11 +50,13 @@ var tags_ffs = (function(){
             var boxes = document.getElementsByClassName(tags_ffs.opts.container_class);
             if(boxes.length){
                 
-                if(tags_ffs.opts.css.length){ // Header style
+                // Header style
+                var css = (tags_ffs.opts.css === '') ? tags_ffs.generate_css() : tags_ffs.opts.css;
+                if(css){
                     var style = document.createElement("style");
                     style.type = "text/css";
                     style.id = 'tags-ffs-style';
-                    style.appendChild(document.createTextNode(tags_ffs.opts.css));
+                    style.appendChild(document.createTextNode(css));
                     document.getElementsByTagName("head")[0].appendChild(style);
                 }
 
@@ -98,6 +93,21 @@ var tags_ffs = (function(){
                     }, false);
                 }
             }
+        },
+
+        // Create the libs CSS using assigned classes
+        generate_css : function(){
+            var hc = '.'+tags_ffs.opts.holder_class;
+            var cc = '.'+tags_ffs.opts.container_class;
+            var ic = '.'+tags_ffs.opts.input_class;
+            return [
+                cc+' { border: 1px solid; width: 100%; overflow: hidden; clear: both; }',
+                cc+' '+ic+' { border-color: transparent; background-color: transparent; color: inherit; padding: 15px 10px; width: 100%; float: left; box-sizing: border-box; }',
+                cc+' '+hc+' { float: left; min-height: 24px; }',
+                cc+' '+hc+' span { position: relative; display: inline-block; line-height: 30px; border: 1px solid; border-radius: 3px; padding: 2px 15px 2px 0; margin: 3px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
+                cc+' '+hc+' span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
+                cc+' '+hc+' span.pre-delete{ border-color: #c00; }'
+            ].join('');
         },
 
         // Creates element to add tags to.
@@ -260,5 +270,5 @@ var tags_ffs = (function(){
             item = this.opts.on_del(item);
             item.parentNode.removeChild(item);
         }
-    }
+    };
 })();

@@ -39,6 +39,7 @@
         font-size: 20px;
         padding: 10px 10px;
         width: 100%;
+        min-height: 80px;
     }
     .tags-ffs-custom .holder-ffs {
         min-height: 24px;
@@ -143,7 +144,7 @@
             tags_ffs.init({
                 container_class : 'tags-ffs-custom',
                 input_placeholder : 'Flexbox styled tag-box...',
-                css : '', // CSS is all in #cutom-tags-style
+                css : false, // CSS is all in #cutom-tags-style
             });
         }
         

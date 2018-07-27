@@ -60,15 +60,7 @@ window.onload = tags_ffs.init({
     // HTML or character to use for tag deletion
     delete_icon   : 'x',
     // Plugin default css 
-    // (If you change a class name you will have to change this too)
-    css : [
-        '.tags-ffs { border: 1px solid; width: 100%; overflow: hidden; clear: both; }',
-        '.tags-ffs .input-ffs { border-color: transparent; background-color: transparent; color: inherit; padding: 15px 10px; width: 100%; float: left; box-sizing: border-box; }',
-        '.tags-ffs .holder-ffs { float: left; min-height: 24px; }',
-        '.tags-ffs .holder-ffs span { position: relative; display: inline-block; line-height: 30px; border: 1px solid; border-radius: 3px; padding: 2px 15px 2px 0; margin: 3px; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
-        '.tags-ffs .holder-ffs span u { position: absolute; top: 2px; right: 2px; cursor: pointer; text-decoration: none; opacity: .5; }',
-        '.tags-ffs .holder-ffs span.pre-delete{ border-color: #c00; }'
-    ].join(''),
+    css : '',
 
     // Callbacks
     on_add : function(f){ return f; },
@@ -115,15 +107,19 @@ window.onload = tags_ffs.init({
 
 ## Styling
 
-Default styles on FFS are rudimentary at best. But this is easy to fix given you have some experience with CSS. To set your own styles you will have to remove the default ones:
+Default styles on FFS are rudimentary at best. But this is easy to fix given you have some experience with CSS.
+
+To set your own styles you will have to set the the default ones to `false`:
 
 ```js
 // Remove default styles
-tags_ffs.init({css : ''});
+tags_ffs.init({css : false});
 
 ```
 
-And then you can add your own styles to the header or to the css option:
+And then you can add your own styles to the header or to the css option, note that if you are changing any of the default class names your CSS should change accordingly.
+
+Here is an example of the default CSS used by tags-ffs:
 
 ```css
 .tags-ffs {
@@ -180,7 +176,7 @@ Found a bug? That's a good thing. Please rise an issue [here](https://github.com
 - A "real" inline tag-box would be nice to have in the test page.
 
 ## Changelog
-
+- 0.0.5 - Added generate_css() to generate css using custom classes, (override with `tags_ffs.settings.css`)
 - 0.0.4 - Pasted comma bug fixed (again).
 - 0.0.3 - Started using data-tag attribute to store the tags, added "submit_on_enter" option.
 - 0.0.2 - Squashed bug related to pasting text containing commas.
